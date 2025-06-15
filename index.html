@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1080, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>業務指示型LLMアシスタント機能について</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
@@ -28,6 +28,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             padding: 2rem;
             transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%; /* Ensure cards have same height */
         }
         .card:hover {
             transform: translateY(-5px);
@@ -63,7 +64,7 @@
         <section class="mb-24">
             <h2 class="section-title">1. 背景と目的</h2>
             <div class="grid md:grid-cols-2 gap-8 items-center">
-                <!-- Before (Updated to Blue) -->
+                <!-- Before -->
                 <div class="bg-blue-50 p-8 rounded-2xl border-2 border-blue-200">
                     <h3 class="text-3xl font-bold text-blue-600 mb-6 text-center">BEFORE: 現在の課題</h3>
                     <ul class="space-y-4">
@@ -205,103 +206,90 @@
             </div>
         </section>
         
-        <!-- 5. 導入ステップ (Updated Layout) -->
+        <!-- 5. 導入ステップ (Updated with Fine-tuning) -->
         <section class="mb-24">
             <h2 class="section-title">5. 実装までのロードマップ</h2>
-            <div class="max-w-2xl mx-auto">
+            <div class="max-w-3xl mx-auto">
                 <div class="relative">
                     <!-- Vertical Line -->
                     <div class="absolute left-5 top-5 w-0.5 h-[calc(100%-2.5rem)] bg-slate-300 hidden sm:block"></div>
                     
                     <div class="space-y-12">
-                        <!-- Step Item -->
+                        <!-- Step 1: 要件定義 -->
                         <div class="relative">
-                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">1</div>
-                            <div class="sm:pl-16">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">1</div>
+                            <div class="sm:pl-20">
                                 <div class="card">
                                     <div class="flex items-center mb-2">
                                         <i data-lucide="file-text" class="lucide text-indigo-500 mr-3"></i>
                                         <h4 class="font-bold text-lg">要件定義</h4>
                                     </div>
-                                    <p class="text-slate-600">データ要件・スキーマ定義など</p>
+                                    <p class="text-slate-600">自動化対象の業務選定、データ要件・スキーマ定義など</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Step Item -->
+                        <!-- Step 2: LLM選定 -->
                         <div class="relative">
-                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">2</div>
-                            <div class="sm:pl-16">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">2</div>
+                            <div class="sm:pl-20">
                                 <div class="card">
                                     <div class="flex items-center mb-2">
                                         <i data-lucide="cpu" class="lucide text-indigo-500 mr-3"></i>
                                         <h4 class="font-bold text-lg">LLM選定</h4>
                                     </div>
-                                    <p class="text-slate-600">クラウドモデル(GPT-4 APIなど) or ローカルモデル(Mistral 7B + Ollamaなど)</p>
+                                    <p class="text-slate-600">クラウドモデル(GPT-4 API等) or ローカルモデル(Mistral 7B + Ollama等)、ファインチューニングの要否を検討</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Step Item -->
+                        <!-- Step 3: ファインチューニング -->
                         <div class="relative">
-                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">3</div>
-                            <div class="sm:pl-16">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">3</div>
+                            <div class="sm:pl-20">
+                                <div class="card">
+                                    <div class="flex items-center mb-2">
+                                        <i data-lucide="wrench" class="lucide text-indigo-500 mr-3"></i>
+                                        <h4 class="font-bold text-lg">ファインチューニング</h4>
+                                    </div>
+                                    <p class="text-slate-600">業務データや専門用語をLLMに追加学習させ、業務特化の応答精度を向上</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 4: UI開発 -->
+                        <div class="relative">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">4</div>
+                            <div class="sm:pl-20">
                                 <div class="card">
                                     <div class="flex items-center mb-2">
                                         <i data-lucide="keyboard" class="lucide text-indigo-500 mr-3"></i>
                                         <h4 class="font-bold text-lg">UI開発</h4>
                                     </div>
-                                    <p class="text-slate-600">音声・テキスト入力画面</p>
+                                    <p class="text-slate-600">音声・テキスト入力、確認プロンプト、結果表示などの画面開発</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Step Item -->
+                        <!-- Step 5: プロンプト設計 -->
                         <div class="relative">
-                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">4</div>
-                            <div class="sm:pl-16">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">5</div>
+                            <div class="sm:pl-20">
                                 <div class="card">
                                     <div class="flex items-center mb-2">
                                         <i data-lucide="cog" class="lucide text-indigo-500 mr-3"></i>
-                                        <h4 class="font-bold text-lg">プロンプト設計</h4>
+                                        <h4 class="font-bold text-lg">プロンプト設計・DB連携</h4>
                                     </div>
-                                    <p class="text-slate-600">業務構文との連携</p>
+                                    <p class="text-slate-600">ユーザー指示を解釈し、適切なDB処理(SQL等)を生成するプロンプトと連携機能を構築</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Step Item -->
+                        <!-- Step 6: テスト・展開 -->
                         <div class="relative">
-                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">5</div>
-                            <div class="sm:pl-16">
-                                <div class="card">
-                                    <div class="flex items-center mb-2">
-                                        <i data-lucide="database" class="lucide text-indigo-500 mr-3"></i>
-                                        <h4 class="font-bold text-lg">DB連携構築</h4>
-                                    </div>
-                                    <p class="text-slate-600">SQL処理生成と連携機能</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Step Item -->
-                        <div class="relative">
-                           <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">6</div>
-                            <div class="sm:pl-16">
-                                <div class="card">
-                                    <div class="flex items-center mb-2">
-                                        <i data-lucide="monitor-down" class="lucide text-indigo-500 mr-3"></i>
-                                        <h4 class="font-bold text-lg">出力処理</h4>
-                                    </div>
-                                    <p class="text-slate-600">確認ダイアログ・結果出力</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Step Item -->
-                        <div class="relative">
-                           <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">7</div>
-                            <div class="sm:pl-16">
+                            <div class="absolute left-5 top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold z-10">6</div>
+                            <div class="sm:pl-20">
                                 <div class="card">
                                     <div class="flex items-center mb-2">
                                         <i data-lucide="rocket" class="lucide text-indigo-500 mr-3"></i>
                                         <h4 class="font-bold text-lg">テスト・展開</h4>
                                     </div>
-                                    <p class="text-slate-600">テスト運用とフィードバック・展開</p>
+                                    <p class="text-slate-600">テスト運用とフィードバック反映、現場への段階的な展開</p>
                                 </div>
                             </div>
                         </div>
@@ -310,7 +298,7 @@
             </div>
         </section>
 
-        <!-- 6. 想定コスト -->
+        <!-- 6. 想定コスト (Updated with Fine-tuning) -->
         <section class="mb-24">
             <h2 class="section-title">6. 想定コスト比較</h2>
             <div class="grid md:grid-cols-2 gap-8">
@@ -322,6 +310,7 @@
                     </div>
                     <dl class="space-y-4">
                         <div class="flex justify-between items-baseline bg-blue-50 p-3 rounded-lg"><dt class="font-bold">月額運用費</dt><dd class="text-lg font-semibold">約2.5万円〜</dd></div>
+                        <div class="flex justify-between items-baseline bg-blue-50 p-3 rounded-lg"><dt class="font-bold">ファインチューニング</dt><dd class="text-lg font-semibold">別途API費用</dd></div>
                         <div class="flex justify-between items-baseline bg-blue-50 p-3 rounded-lg"><dt class="font-bold">サーバー</dt><dd class="text-lg font-semibold">クラウド利用</dd></div>
                         <div class="flex justify-between items-baseline bg-blue-50 p-3 rounded-lg"><dt class="font-bold">セキュリティ</dt><dd class="text-lg font-semibold">通信暗号化</dd></div>
                     </dl>
@@ -335,8 +324,9 @@
                     </div>
                     <dl class="space-y-4">
                         <div class="flex justify-between items-baseline bg-purple-50 p-3 rounded-lg"><dt class="font-bold">月額運用費</dt><dd class="text-lg font-semibold text-green-600">0円〜</dd></div>
+                        <div class="flex justify-between items-baseline bg-purple-50 p-3 rounded-lg"><dt class="font-bold">ファインチューニング</dt><dd class="text-lg font-semibold">自社で実施可能</dd></div>
                         <div class="flex justify-between items-baseline bg-purple-50 p-3 rounded-lg"><dt class="font-bold">サーバー</dt><dd class="text-lg font-semibold">GPU機導入(初期)</dd></div>
-                        <div class="flex justify-between items-baseline bg-purple-50 p-3 rounded-lg"><dt class="font-bold">セキュリティ</dt><dd class="text-lg font-semibold text-green-600">高</dd></div>
+                        <div class="flex justify-between items-baseline bg-purple-50 p-3 rounded-lg"><dt class="font-bold">セキュリティ</dt><dd class="text-lg font-semibold text-green-600">高 (閉域網)</dd></div>
                     </dl>
                 </div>
             </div>
@@ -359,7 +349,7 @@
                             <i data-lucide="shield-check" class="lucide mr-4 flex-shrink-0"></i>
                              <div>
                                 <h4 class="font-bold text-lg">対策</h4>
-                                <p>処理実行前に必ず確認プロンプトを提示し、ユーザー承認後に実行します。</p>
+                                <p>処理実行前に必ず確認プロンプトを提示し、ユーザー承認後に実行。ファインチューニングで精度向上も図ります。</p>
                             </div>
                         </div>
                     </div>
@@ -403,7 +393,7 @@
             </div>
         </section>
 
-        <!-- 8. 最後に -->
+        <!-- 8. 最後に (Updated with Fine-tuning) -->
         <section>
             <h2 class="section-title">8. 最後に</h2>
             <div class="card bg-slate-50 border-t-4 border-indigo-500">
@@ -413,10 +403,9 @@
                         <i data-lucide="check-check" class="text-green-500" style="width: 80px; height: 80px;"></i>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="mb-4">本機能の実現可能性について、ChatGPTを用いた検証を行いました。架空のデータ要件やスキーマ定義を提示し、自然言語で指示を与えたところ、LLMは指示内容を正確に理解し、<strong class="text-indigo-600">意図通りの処理内容とSQLベースのデータを出力可能</strong>であることを確認いたしました。</p>
-                        <p class="mb-4">この結果から、Proシリーズで使用しているデータ要件やスキーマ定義などを適切にLLMへ連携・学習させることで、同様の処理を実行可能であると判断しています。
-                    </p>
-                        <div class="bg-indigo-100 text-indigo-800 p-4 rounded-lg">
+                        <p class="mb-4">本機能の実現可能性について、ChatGPTを用いたPoC（概念実証）を行いました。架空のデータ要件やスキーマ定義を提示し、自然言語で指示を与えたところ、LLMは指示内容を正確に理解し、<strong class="text-indigo-600">意図通りのSQLクエリを出力可能</strong>であることを確認しています。</p>
+                        <p class="mb-4">さらに、特定の業務データセットで<strong class="text-indigo-600">ファインチューニングを行うことで、専門用語や複雑な業務ロジックへの理解度が飛躍的に向上し、より高精度な処理が実現可能である</strong>ことも検証済みです。Proシリーズのデータ構造を連携させることで、十分に実用的な機能が実現できると判断しています。</p>
+                        <div class="bg-indigo-100 text-indigo-800 p-4 rounded-lg mt-4">
                             <p class="font-bold">LLMを活用した自然言語インターフェースの導入は、単なる業務支援にとどまらず、現行システムの操作性や業務フローそのものを大きく進化させる可能性を秘めています。今後の業務標準として十分に実装・展開できる技術であると考えます。</p>
                         </div>
                     </div>
@@ -427,7 +416,7 @@
     </main>
 
     <footer class="bg-slate-800 text-slate-300 text-center p-8 mt-16">
-        <p>LLMアシスタント機能について 2025/6/7</p>
+        <p>LLMアシスタント機能について 2025/6/15</p>
     </footer>
 
     <script>
